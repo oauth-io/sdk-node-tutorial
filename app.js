@@ -1,4 +1,7 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 
 /* Requiring the lib */
 
@@ -7,6 +10,9 @@ var express = require('express');
 var app = express();
 
 app.use(express.static('public'));
+app.use(bodyParser());
+app.use(cookieParser());
+app.use(session({secret: 'keyboard cat', key: 'sid'}));
 
 /* Initialization */
 
