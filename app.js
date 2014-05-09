@@ -29,7 +29,13 @@ oauth.initialize(config.key, config.secret);
 
 /* Endpoints */
 
-// Add a .get endpoint for the state token here (/oauth/token) (done in step-2)
+app.get('/oauth/token', function (req, res) {
+	var token = oauth.generateStateToken(req);
+
+	res.json({
+		token: token
+	});
+});
 
 
 // Add a .post endpoint for the state token here (/oauth/signin) (done in step-3)
