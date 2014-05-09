@@ -2,17 +2,24 @@ var express = require('express');
 
 /* Requiring the lib */
 
-// Require oauthio here (done in step-1)
+var oauth = require('oauthio');
 
 var app = express();
 
 app.use(express.static('public'));
 
 /* Initialization */
+try {
+	var config = require('./config');	
+} catch (e) {
+	// Create a config.js file returning an object like the following if you haven't done it yet
+	var config = {
+		key: 'your_key',
+		secret: 'your_secret'
+	};
+}
 
-
-// Initialize oauthio here
-
+oauth.initialize(config.key, config.secret);
 
 /* Endpoints */
 
