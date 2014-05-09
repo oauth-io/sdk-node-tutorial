@@ -9,6 +9,9 @@
   "author": "oauth.io",
   "license": "Apache2",
   "dependencies": {
-    "express": "^4.1.2"
+    "express": "^4.1.2",
+    "cookie-parser": "^1.0.1",
+    "express-session": "^1.0.4",
+    "body-parser": "^1.0.2"
   }
 }
