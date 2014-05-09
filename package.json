@@ -1,0 +1,14 @@
+{
+  "name": "sdk-node-tutorial",
+  "version": "0.0.0",
+  "description": "Learn how to use OAuth.io server-side flow with Nodejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "oauth.io",
+  "license": "Apache2",
+  "dependencies": {
+    "express": "^4.1.2"
+  }
+}

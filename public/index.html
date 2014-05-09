@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OAuth.io Tutorial</title>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style/style.css">
+        <link rel="icon" type="image/png" href="resources/icon.png">
+    </head>
+    <body>
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-brand"><img src="resources/icon.png" alt="OAuth.io"> OAuth.io Tutorial</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a target="_blank" href="https://oauth.io">OAuth.io</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="jumbotron">
+                <div class="container">
+                    <h3>OAuth.io server side tutorial with Node.js</h3>
+                    <p>
+                    This tutorial helps you understand how to integrate OAuth.io to your Node.js backend.
+                    </p>
+                    <div>
+                        <button class="btn btn-primary" id="login_button">Login through Facebook</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3>Your profile</h3>
+                        <div class="row">
+                            <div class="col-xs-9">
+                                <p>
+                                All this info is retrieved through your backend.
+                                </p>
+                                <p>
+                                <strong>Your name :</strong> <span id="name_box">Not retrieved yet</span>
+                                </p>
+                                <p>
+                                <strong>Your email :</strong> <span id="name_box">Not retrieved yet</span>
+                                </p>
+                                <p>
+                                <strong>Your birthday :</strong> <span id="name_box">Not retrieved yet</span>
+                                </p>
+                            </div>
+                            <div class="col-xs-3">
+                                <a href="#" class="thumbnail">
+                                <img src="http://placehold.it/100x100" alt="...">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="alert alert-info">
+                            <strong>Don't forget to restart the server if you made changes on the backend.</strong>
+<pre>$ node app.js</pre>
+                        </div>
+
+                        <div class="alert alert-warning token_endpoint_missing missing">
+                            <div>State token endpoint not available. Go to <strong>step-2</strong> if you want to skip that step.</div>
+                            <div>Note that all your changes will be discarded</div>
+<pre>$ git checkout step-2 --force</pre>
+                        </div>
+                        <div class="alert alert-success token_endpoint_available available">
+                            <div>Token endpoint is available on <strong>/oauth/token</strong></div>
+                        </div>
+                        <div class="alert alert-warning auth_endpoint_missing missing">
+                            <div>Auth endpoint not available. Go to <strong>step-3</strong> if you want to skip that step.</div>
+                            <div>Note that all your changes will be discarded</div>
+<pre>$ git checkout step-3 --force</pre>
+                        </div>
+                        <div class="alert alert-success auth_endpoint_available available">
+                            <div>Auth endpoint is available on <strong>/oauth/signin</strong></div>
+                        </div>
+                        <div class="alert alert-warning request_endpoint_missing missing">
+                            <div>Request endpoint not available. Go to <strong>step-4</strong> if you want to skip that step.</div>
+                            <div>Note that all your changes will be discarded</div>
+<pre>$ git checkout step-4 --force</pre>
+                        </div>
+                        <div class="alert alert-success request_endpoint_available available">
+                            <div>Request endpoint is available on <strong>/me</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="src/oauth.js"></script>
+        <script src="src/background.js"></script>
+        <script src="src/script.js"></script>
+    </body>
+</html>
