@@ -38,7 +38,21 @@ app.get('/oauth/token', function (req, res) {
 });
 
 
-// Add a .post endpoint for the state token here (/oauth/signin) (done in step-3)
+app.post('/oauth/signin', function (req, res) {
+	var code = req.body.code;
+	oauth.auth(code, req)
+	.then(function (r) {
+		// Here the user is authenticated, and the access token 
+		// for the requested provider is stored in the session.
+		// Continue the tutorial or checkout the step-4 to get
+		// the code for the request
+		res.send(200, 'The user is authenticated');
+	})
+	.fail(function (e) {
+		console.log(e);
+		res.send(400, 'Code is incorrect');
+	});
+});
 
 
 // Add a .get endpoint for the request here (/me) (done in step-4)
