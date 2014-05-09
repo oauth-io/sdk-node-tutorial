@@ -19,6 +19,7 @@ $.ajax({
 
 $.ajax({
 	url: '/oauth/signin',
+	method: 'POST',
 	success: function () {
 		available('auth');
 	},	
