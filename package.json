@@ -10,6 +10,9 @@
   "license": "Apache2",
   "dependencies": {
     "express": "^4.1.2",
-    "oauthio": "^0.1.0"
+    "oauthio": "^0.1.0",
+    "cookie-parser": "^1.0.1",
+    "express-session": "^1.0.4",
+    "body-parser": "^1.0.2"
   }
 }
