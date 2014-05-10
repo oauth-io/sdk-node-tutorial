@@ -7,6 +7,9 @@ function retrieve_token(callback) {
 		url: '/oauth/token',
 		success: function (data, status) {
 			callback(null, data.token);
+		},
+		error: function (data) {
+			callback(data);
 		}
 	});
 }
