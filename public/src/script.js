@@ -1,5 +1,5 @@
 function init_oauthio() {
-	// Add the code to initialize OAuth.io here
+	OAuth.initialize(credentials.key);
 }
 
 
