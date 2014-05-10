@@ -31,7 +31,15 @@ function authenticate(code, callback) {
 }
 
 function retrieve_user_info(callback) {
-	// Add the code to perform a user request here
+	$.ajax({
+		url: '/me',
+		success: function (data, status) {
+			callback(data);
+		},
+		error: function (data) {
+
+		}
+	});
 }
 
 $('#login_button').click(function() {
