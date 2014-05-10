@@ -22,6 +22,9 @@ function authenticate(code, callback) {
 			code: code
 		},
 		success: function (data, status) {
+			callback(null, data);
+		},
+		error: function (data) {
 			callback(data);
 		}
 	});
