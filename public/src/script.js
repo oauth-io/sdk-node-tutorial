@@ -24,10 +24,12 @@ function retrieve_user_info(callback) {
 
 $('#login_button').click(function() {
 	init_oauthio();
-	retrieve_token(function(err, code) {
-		OAuth.popup('facebook')
+	retrieve_token(function(err, token) {
+		OAuth.popup('facebook', {
+				state: token
+			})
 			.done(function(r) {
-				authenticate(code, function(err) {
+				authenticate(r.code, function(err) {
 					if (!err) {
 						retrieve_user_info(function(user_data) {
 							$('#name_box').html(user_data.name)
