@@ -6,7 +6,7 @@ function retrieve_token(callback) {
 	$.ajax({
 		url: '/oauth/token',
 		success: function (data, status) {
-			callback(data.token);
+			callback(null, data.token);
 		}
 	});
 }
