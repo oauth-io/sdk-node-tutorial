@@ -55,7 +55,21 @@ app.post('/oauth/signin', function (req, res) {
 });
 
 
-// Add a .get endpoint for the request here (/me) (done in step-4)
+app.get('/me', function (req, res) {
+	var request_object = oauth.create('facebook');
+	// Here we perform a request using the .me() method.
+	// This retrieves a unified object representing the authenticated user.
+	// You could also use .get('/me') and map the results to fields usable from
+	// the front-end (which waits for the fields 'name', 'email' and 'avatar').
+	request_object.me()
+	.then(function (user_data) {
+		res.json(user_data);
+	})
+	.fail(function (e) {
+		console.log(e);
+		res.send(400, 'An error occured');
+	});
+});
 
 app.listen(process.env.NODEJS_PORT || 3000, function () {
 	console.log('OAuth.io Tutorial server running on port ' + (process.env.NODEJS_PORT || 3000));
