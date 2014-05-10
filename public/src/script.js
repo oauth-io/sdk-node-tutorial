@@ -13,7 +13,16 @@ function retrieve_token(callback) {
 }
 
 function authenticate(code, callback) {
-	// Add the code to authenticate the user here
+	$.ajax({
+		url: '/oauth/signin',
+		method: 'POST',
+		data: {
+			code: code
+		},
+		success: function (data, status) {
+			callback(data);
+		}
+	});
 }
 
 function retrieve_user_info(callback) {
