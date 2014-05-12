@@ -276,28 +276,20 @@ $('#login_button').click(function() {
     init_oauthio();
     // calls your function to retrieve a token from your endpoint
     retrieve_token(function(err, token) {
-        // launches the popup authentication, with the retrieved token
-        OAuth.popup('facebook', {
-                state: token
-            })
-            .done(function(r) {
-                // calls your function to send the code to the 
-                // authentication endpoint
-                authenticate(r.code, function(err) {
-                    if (!err) {
-                        // calls your function to call your request endpoint
-                        retrieve_user_info(function(user_data) {
-                            // fills elements in the page with the user info
-                            $('#name_box').html(user_data.name)
-                            $('#email_box').html(user_data.email);
-                            $('#img_box').attr('src', user_data.avatar);
-                        });
-                    }
-                });
-            })
-            .fail(function(e) {
-                console.log(e);
+            // calls your function to launch a popup with the state token
+            // and call the authentication endpoint with the resulting code
+            authenticate(token, function(err) {
+                if (!err) {
+                    // calls your function to call your request endpoint
+                    retrieve_user_info(function(user_data) {
+                        // fills elements in the page with the user info
+                        $('#name_box').html(user_data.name)
+                        $('#email_box').html(user_data.email);
+                        $('#img_box').attr('src', user_data.avatar);
+                    });
+                }
             });
+        })
     });
 });
 ```
@@ -364,5 +356,22 @@ $ git checkout step-6 --force
 
 **step-7** Adding a call to authenticate the user
 
+In this step, you need to add code to launch a popup from the OAuth.io client-side SDK, giving it the state token you got from the previous step.
 
+Once the user will have logged in the provider's website and accepted the asked permissions, you'll be given a code from OAuth.io that will allow your backend to retrieve the provider access token.
 
+You then need to send the code to the authentication endpoint you created in your backend previously.
+
+To do all that, just replace the placeholder :
+
+```javascript
+function authenticate(code, callback) {
+    // Add the code to authenticate the user here
+}
+```
+
+with :
+
+```javascript
+
+```
