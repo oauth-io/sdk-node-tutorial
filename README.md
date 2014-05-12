@@ -340,3 +340,27 @@ function retrieve_token(callback) {
 
 with this code :
 
+```javascript
+function retrieve_token(callback) {
+    $.ajax({
+        url: '/oauth/token',
+        success: function (data, status) {
+            callback(null, data.token);
+        },
+        error: function (data) {
+            callback(data);
+        }
+    });
+}
+```
+
+This allows us to handle the token from elsewhere in a callback. If an error occurs, we give it as a first argument to `callback`.
+
+That's it for step 6. If you want to get the code right away, just run the following command :
+
+```sh
+$ git checkout step-6 --force
+```
+
+**step-7** Adding a call to authenticate the user (tagged *step-7*)
+
