@@ -312,5 +312,31 @@ function init_oauthio() {
 
 Fill that function like this :
 
+```javascript
+function init_oauthio() {
+    OAuth.initialize(credentials.key);
+}
+```
 
+The `credentials` object has to be created first. The `index.html` page also points to a `src/credentials.js` file in which we can setup that object. You need to rename the `src/credentials.example.js` to `src/credentials.js` and fill the key with your OAuth.io app key.
+
+That's it for step 5. To get the code right away, just run the following command :
+
+```sh
+$ git clone step-5 --force
+```
+
+**step-6** Adding a call to retrieve the state token
+
+In this step you'll have to fill the `retrieve_token` function to get a token from the backend. This is a simple GET request, that we'll perform thanks to jQuery's `ajax` method.
+
+Just replace the placeholder :
+
+```javascript
+function retrieve_token(callback) {
+    // Add the code to retrieve the state token here
+}
+```
+
+with this code :
 
