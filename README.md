@@ -35,18 +35,18 @@ The tutorial thus contains the following steps :
 
 **Part 1 : server-side code**
 
-**step-0** Getting the code (tagged *step-0*)
-**step-1** Initializing OAuth.io server-side (tagged *step-1*)
-**step-2** Adding a state token retrieval endpoint server-side (tagged *step-2*)
-**step-3** Adding an authentication endpoint server-side (tagged *step-3*)
-**step-4** Adding a request endpoint server-side (tagged *step-4*)
+- **step-0** Getting the code (tagged *step-0*)
+- **step-1** Initializing OAuth.io server-side (tagged *step-1*)
+- **step-2** Adding a state token retrieval endpoint server-side (tagged *step-2*)
+- **step-3** Adding an authentication endpoint server-side (tagged *step-3*)
+- **step-4** Adding a request endpoint server-side (tagged *step-4*)
 
 **Part 2 : client-side code**
 
-**step-5** Initializing OAuth.io client-side (tagged *step-5*)
-**step-6** Adding a call to retrieve the state token (tagged *step-6*)
-**step-7** Adding a call to authenticate the user (tagged *step-7*)
-**step-8** Adding a call to the request endpoint to get user info (tagged *step-8*)
+- **step-5** Initializing OAuth.io client-side (tagged *step-5*)
+- **step-6** Adding a call to retrieve the state token (tagged *step-6*)
+- **step-7** Adding a call to authenticate the user (tagged *step-7*)
+- **step-8** Adding a call to the request endpoint to get user info (tagged *step-8*)
 
 Before you start
 ----------------
