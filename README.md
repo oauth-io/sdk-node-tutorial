@@ -69,4 +69,67 @@ The first thing you need to do is to install the OAuth.io Node.js SDK and save i
 $ npm install oauthio --save
 ```
 
-Once that's done, you can initialize the framework server-side.
+Once that's done, you can initialize the framework server-side in the `app.js` file. This file holds the whole server side to simplify things. The backend is based on express.js.
+
+In that file, you'll find comments defining placeholders for the different steps of the tutorial.
+
+Here we need to initialize the SDK. To do that, you need to note the key and secret of the app you want to use on OAuth.io (in that case an app with the provider `Facebook`).
+
+Once you have them, take a look at the `config.example.js`. This file holds a configuration that we will use in the app.js file, and will enable us to store the key and secret efficiently.
+
+You'll have to fill the gaps, and rename the file as `config.js`.
+
+```javascript
+module.exports = {
+    key: 'your_app_key',
+    secret: 'your_app_secret'
+};
+```
+
+Then, we will use this file to initialize the backend in `app.js`. You will find in that file a comment placeholder for the initialization part :
+
+```javascript
+
+/* Requiring the lib */
+
+// Require oauthio here (done in step-1)
+
+[...]
+
+/* Initialization */
+
+// Initialize oauthio here (done in step-1)
+
+```
+
+
+Replace the `// Require oauthio here (done in step-1)` comment with :
+
+```javascript
+var oauth = require('oauthio');
+```
+
+Replace the `// Initialize oauthio here` comment with :
+
+```javascript
+try {
+    var config = require('./config.js');
+    oauth.initialize(config.key, config.secret);
+} catch (e) {
+    console.log(e);
+}
+```
+
+That's it for step 1.
+
+
+If you want to get the code from step 1, just run the following command to get to step 2 :
+
+```sh
+$ git checkout step-2 --force
+```
+
+Note that any change you made will be discarded and replaced by the code shown in this tutorial (except for your config.js file, that is ignored and will remain there).
+
+**step-2** Adding a state token retrieval endpoint server-side
+
