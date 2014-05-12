@@ -373,5 +373,60 @@ function authenticate(code, callback) {
 with :
 
 ```javascript
+function authenticate(token, callback) {
+    // Launches a popup showing the provider's website
+    // for the user to login and to accept permissions
+    OAuth.popup('facebook', {
+        state: token
+    })
+        .done(function(r) {
+            // Sends the code to the authentication endpoint
+            // we created earlier
+            $.ajax({
+                url: '/oauth/signin',
+                method: 'POST',
+                data: {
+                    code: r.code
+                },
+                success: function(data, status) {
+                    // Here the user is authenticated.
+                    // We can call a request endpoint to retrieve information
+                    // in the callback.
+                    callback(null, data);
+                },
+                error: function(data) {
+                    callback(data);
+                }
+            });
+        })
+        .fail(function(e) {
+            console.log(e);
+        });
+}
+```
+
+
+That's it for step 7. If you want to get the code right away, just run the following command :
+
+```sh
+$ git checkout step-7 --force
+```
+
+**step-8** Adding a call to the request endpoint to get user info
+
+Now we can finally retrieve the user's information through our `/me` endpoint.
+
+To do that, we need to make a GET request to that endpoint. Just replace the following placeholder :
+
+```javascript
+function retrieve_user_info(callback) {
+    // Add the code to perform a user request here
+}
+```
+
+with the following code :
+
+```javascript
 
 ```
+
