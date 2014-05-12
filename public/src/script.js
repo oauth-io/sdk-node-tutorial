@@ -6,7 +6,7 @@ function retrieve_token(callback) {
 	// Add the code to retrieve the state token here
 }
 
-function authenticate(code, callback) {
+function authenticate(token, callback) {
 	// Add the code to authenticate the user here
 }
 
@@ -17,7 +17,7 @@ function retrieve_user_info(callback) {
 $('#login_button').click(function() {
 	init_oauthio();
 	retrieve_token(function(err, token) {
-		authenticate(function(err) {
+		authenticate(token, function(err) {
 			if (!err) {
 				retrieve_user_info(function(user_data) {
 					$('#name_box').html(user_data.name)
