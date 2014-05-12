@@ -5,28 +5,36 @@ function init_oauthio() {
 function retrieve_token(callback) {
 	$.ajax({
 		url: '/oauth/token',
-		success: function (data, status) {
+		success: function(data, status) {
 			callback(null, data.token);
 		},
-		error: function (data) {
+		error: function(data) {
 			callback(data);
 		}
 	});
 }
 
-function authenticate(code, callback) {
-	$.ajax({
-		url: '/oauth/signin',
-		method: 'POST',
-		data: {
-			code: code
-		},
-		success: function (data, status) {
-			callback(null, data);
-		},
-		error: function (data) {
-			callback(data);
-		}
+function authenticate(token, callback) {
+	OAuth.popup('facebook', {
+		state: token
+	})
+	.done(function(r) {
+		$.ajax({
+			url: '/oauth/signin',
+			method: 'POST',
+			data: {
+				code: r.code
+			},
+			success: function(data, status) {
+				callback(null, data);
+			},
+			error: function(data) {
+				callback(data);
+			}
+		});
+	})
+	.fail(function(e) {
+		console.log(e);
 	});
 }
 
@@ -38,8 +46,8 @@ $('#login_button').click(function() {
 	init_oauthio();
 	retrieve_token(function(err, token) {
 		OAuth.popup('facebook', {
-				state: token
-			})
+			state: token
+		})
 			.done(function(r) {
 				authenticate(r.code, function(err) {
 					if (!err) {
