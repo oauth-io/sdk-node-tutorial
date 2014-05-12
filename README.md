@@ -123,13 +123,14 @@ try {
 That's it for step 1.
 
 
-If you want to get the code from step 1, just run the following command to get to step 2 :
+If you want to get the code from step 1, just run the following command:
 
 ```sh
-$ git checkout step-2 --force
+$ git checkout step-1 --force
 ```
 
 Note that any change you made will be discarded and replaced by the code shown in this tutorial (except for your config.js file, that is ignored and will remain there).
 
 **step-2** Adding a state token retrieval endpoint server-side
+
 
