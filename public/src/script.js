@@ -45,7 +45,7 @@ function retrieve_user_info(callback) {
 $('#login_button').click(function() {
 	init_oauthio();
 	retrieve_token(function(err, token) {
-		authenticate(function(err) {
+		authenticate(token, function(err) {
 			if (!err) {
 				retrieve_user_info(function(user_data) {
 					$('#name_box').html(user_data.name)
