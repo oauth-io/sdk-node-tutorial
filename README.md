@@ -154,7 +154,7 @@ $ git checkout step-1 --force
 
 Note that any change you made will be discarded and replaced by the code shown in this tutorial (except for your config.js file, that is ignored and will remain there).
 
-**step-2** Adding a state token retrieval endpoint server-side
+**step-2 Adding a state token retrieval endpoint server-side**
 
 Now that the SDK is initialized, we need to add an endpoint to generate unique state tokens. In the `app.js` file, you'll find the following placeholder :
 
@@ -181,7 +181,7 @@ That's it for step 2. If you want to get the code right away, just run the follo
 $ git checkout step-2 --force
 ```
 
-**step-3** Adding an authentication endpoint server-side
+**step-3 Adding an authentication endpoint server-side**
 
 In this step we'll add an authentication endpoint in the backend so that the front-end can give it the code retrieved from OAuth.io.
 
@@ -218,7 +218,7 @@ That's it for step 3. If you want to get the code right away, just run the follo
 $ git checkout step-3 --force
 ```
 
-**step-4** Adding a request endpoint server-side
+**step-4 Adding a request endpoint server-side**
 
 In this step we'll add a final endpoint to our server which will allow the front-end to get information about the user.
 
@@ -262,7 +262,7 @@ $ git checkout step-4 --force
 Part 2 : client-side code
 -------------------------
 
-**step-5** Initializing OAuth.io client-side
+**step-5 Initializing OAuth.io client-side**
 
 In this step we'll initialize the OAuth.io client-side JavaScript SDK. The SDK is already pointed by the `public/index.html` file. That file also points to `public/src/script.js` where we'll put our code.
 
@@ -318,7 +318,7 @@ That's it for step 5. To get the code right away, just run the following command
 $ git clone step-5 --force
 ```
 
-**step-6** Adding a call to retrieve the state token
+**step-6 Adding a call to retrieve the state token**
 
 In this step you'll have to fill the `retrieve_token` function to get a token from the backend. This is a simple GET request, that we'll perform thanks to jQuery's `ajax` method.
 
@@ -354,7 +354,7 @@ That's it for step 6. If you want to get the code right away, just run the follo
 $ git checkout step-6 --force
 ```
 
-**step-7** Adding a call to authenticate the user
+**step-7 Adding a call to authenticate the user**
 
 In this step, you need to add code to launch a popup from the OAuth.io client-side SDK, giving it the state token you got from the previous step.
 
@@ -412,7 +412,7 @@ That's it for step 7. If you want to get the code right away, just run the follo
 $ git checkout step-7 --force
 ```
 
-**step-8** Adding a call to the request endpoint to get user info
+**step-8 Adding a call to the request endpoint to get user info**
 
 Now we can finally retrieve the user's information through our `/me` endpoint.
 
@@ -427,6 +427,27 @@ function retrieve_user_info(callback) {
 with the following code :
 
 ```javascript
-
+function retrieve_user_info(callback) {
+    $.ajax({
+        url: '/me',
+        success: function (data, status) {
+            // Here the callbaxk just gets the name, email and avatar field and
+            // fills the elements of the page.
+            callback(data);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+}
 ```
 
+That's it for step 8. If you want to get the code right away, just run the following command :
+
+```sh
+$ git checkout step-8 --force
+```
+
+**Testing**
+
+You can now launch the server and access the page on `localhost:3000`. You can click on the login button, which will show the popup, retrieve your info and display it on the page.
