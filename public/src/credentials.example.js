@@ -1,3 +1,3 @@
 var credentials = {
-	key: ''
+	key: 'your_app_key'
 };
