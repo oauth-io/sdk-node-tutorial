@@ -30,7 +30,7 @@ oauth.initialize(config.key, config.secret);
 /* Endpoints */
 
 app.get('/oauth/token', function (req, res) {
-	var token = oauth.generateStateToken(req);
+	var token = oauth.generateStateToken(req.session);
 
 	res.json({
 		token: token
@@ -40,8 +40,10 @@ app.get('/oauth/token', function (req, res) {
 
 app.post('/oauth/signin', function (req, res) {
 	var code = req.body.code;
-	oauth.auth(code, req)
-	.then(function (r) {
+	oauth.auth('google', req.session, {
+		code: code
+	})
+	.then(function (request_object) {
 		// Here the user is authenticated, and the access token 
 		// for the requested provider is stored in the session.
 		// Continue the tutorial or checkout the step-4 to get
@@ -56,12 +58,15 @@ app.post('/oauth/signin', function (req, res) {
 
 
 app.get('/me', function (req, res) {
-	var request_object = oauth.create('facebook');
-	// Here we perform a request using the .me() method.
+	// Here we first build a request object from the session with the auth method.
+	// Then we perform a request using the .me() method.
 	// This retrieves a unified object representing the authenticated user.
 	// You could also use .get('/me') and map the results to fields usable from
 	// the front-end (which waits for the fields 'name', 'email' and 'avatar').
-	request_object.me()
+	OAuth.auth('google', req.session)
+	.then(function (request_object) {
+		return request_object.me();
+	})
 	.then(function (user_data) {
 		res.json(user_data);
 	})
