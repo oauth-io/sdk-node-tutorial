@@ -63,7 +63,7 @@ app.get('/me', function (req, res) {
 	// This retrieves a unified object representing the authenticated user.
 	// You could also use .get('/me') and map the results to fields usable from
 	// the front-end (which waits for the fields 'name', 'email' and 'avatar').
-	OAuth.auth('google', req.session)
+	oauth.auth('google', req.session)
 	.then(function (request_object) {
 		return request_object.me();
 	})
