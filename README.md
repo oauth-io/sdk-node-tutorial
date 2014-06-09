@@ -197,7 +197,9 @@ Just replace this comment with a POST endpoint :
 app.post('/oauth/signin', function (req, res) {
     var code = req.body.code;
     // This sends the request to OAuth.io to get an access token
-    oauth.auth(code, req)
+    oauth.auth('google', req.session, {
+        code: code
+    })
     .then(function (r) {
         // Do something with r.access_token,
         // or r.get|post|put|delete|patch|me()
@@ -232,16 +234,19 @@ Just replace this comment with the following code :
 
 ```javascript
 app.get('/me', function (req, res) {
-    // This creates a request object that allows you
-    // to use the .get|post|put|delete|patch|me() methods
-    var request_object = oauth.create(req);
-
-    // Here we'll use the me() method, but note that you
-    // can get the same result from a .get('/me') to Facebook
-    // and mapping its results to the right fields (name, email and avatar)
-    request_object.me()
+    // Here we first build a request object from the session with the auth method.
+    // Then we perform a request using the .me() method.
+    // This retrieves a unified object representing the authenticated user.
+    // You could also use .get('/plus/v1/people/me') and map the 
+    // results to fields usable from the front-end 
+    // (which waits for the fields 'name', 'email' and 'avatar').
+    oauth.auth('google', req.session)
+    .then(function (request_object) {
+        return request_object.me();
+    })
     .then(function (r) {
-        // r contains the response from OAuth.io's mapping of the /me endpoint // on facebook
+        // r contains the response from OAuth.io's mapping of the 
+        // /plus/v1/people/me endpoint on google
         res.json(r);
     })
     .fail(function (e) {
@@ -376,7 +381,7 @@ with :
 function authenticate(token, callback) {
     // Launches a popup showing the provider's website
     // for the user to login and to accept permissions
-    OAuth.popup('facebook', {
+    OAuth.popup('google', {
         state: token
     })
         .done(function(r) {
