@@ -61,7 +61,7 @@ app.get('/me', function (req, res) {
 	// Here we first build a request object from the session with the auth method.
 	// Then we perform a request using the .me() method.
 	// This retrieves a unified object representing the authenticated user.
-	// You could also use .get('/me') and map the results to fields usable from
+	// You could also use .get('/plus/v1/people/me') and map the results to fields usable from
 	// the front-end (which waits for the fields 'name', 'email' and 'avatar').
 	oauth.auth('google', req.session)
 	.then(function (request_object) {
