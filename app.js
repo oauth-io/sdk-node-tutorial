@@ -30,7 +30,7 @@ oauth.initialize(config.key, config.secret);
 /* Endpoints */
 
 app.get('/oauth/token', function (req, res) {
-	var token = oauth.generateStateToken(req);
+	var token = oauth.generateStateToken(req.session);
 
 	res.json({
 		token: token
