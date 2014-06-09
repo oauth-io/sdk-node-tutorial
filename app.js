@@ -40,8 +40,10 @@ app.get('/oauth/token', function (req, res) {
 
 app.post('/oauth/signin', function (req, res) {
 	var code = req.body.code;
-	oauth.auth(code, req)
-	.then(function (r) {
+	oauth.auth('google', req.session, {
+		code: code
+	})
+	.then(function (request_object) {
 		// Here the user is authenticated, and the access token 
 		// for the requested provider is stored in the session.
 		// Continue the tutorial or checkout the step-4 to get
