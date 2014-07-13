@@ -169,7 +169,7 @@ app.get('/oauth/token', function (req, res) {
     // This generates a token and stores it in the session
     var token = oauth.generateStateToken(req);
     // This sends the token to the front-end
-    req.json({
+    res.json({
         token: token
     });
 });
