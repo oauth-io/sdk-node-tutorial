@@ -17,13 +17,35 @@ function retrieve_token(callback) {
 function authenticate(token, callback) {
 	OAuth.popup('google', {
 		state: token,
-		// Google requires the following field 
+		// Google requires the following field
 		// to get a refresh token
 		authorize: {
 		    approval_prompt: 'force'
 		}
-	})
-		.done(function(r) {
+	}).done(function(r) {
+		$.ajaxSetup({
+	     beforeSend: function(xhr, settings) {
+	         function getCookie(name) {
+	             var cookieValue = null;
+	             if (document.cookie && document.cookie != '') {
+	                 var cookies = document.cookie.split(';');
+	                 for (var i = 0; i < cookies.length; i++) {
+	                     var cookie = jQuery.trim(cookies[i]);
+	                     // Does this cookie string begin with the name we want?
+	                 if (cookie.substring(0, name.length + 1) == (name + '=')) {
+	                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+	                     break;
+	                 }
+	             }
+	         }
+	         return cookieValue;
+	         }
+	         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+	             // Only send the token to relative URLs i.e. locally.
+	             xhr.setRequestHeader("x-csrf-token", getCookie('XSRF-TOKEN'));
+	         }
+	     }
+	});
 			$.ajax({
 				url: '/oauth/signin',
 				method: 'POST',
