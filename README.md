@@ -9,7 +9,7 @@ This tutorial is based on a git repository that you can clone. You can follow th
 
 In this tutorial, we'll have to implement the server-side flow. This flow includes the following steps :
 
-- The client asks the backend for a state token through GET
+- The client asks the backend for a state token through GETs
 - The backend gives a state token
 - The client runs the OAuth flow (popup or redirect) with that token
 - OAuth.io responds with a code
@@ -320,7 +320,7 @@ The `credentials` object has to be created first. The `index.html` page also poi
 That's it for step 5. To get the code right away, just run the following command :
 
 ```sh
-$ git clone step-5 --force
+$ git checkout step-5 --force
 ```
 
 **step-6 Adding a call to retrieve the state token**
