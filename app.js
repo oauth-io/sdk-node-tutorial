@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var csrf = require('csurf');
 
 /* Requiring the lib */
 
@@ -10,18 +11,29 @@ var oauth = require('oauthio');
 var app = express();
 
 app.use(express.static('public'));
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({secret: 'keyboard cat', key: 'sid'}));
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: false
+}));
+app.use(csrf());
+app.use(function(req, res, next) {
+  res.cookie('XSRF-TOKEN', req.csrfToken());
+  res.locals.csrftoken = req.csrfToken();
+  next();
+});
 
 /* Initialization */
 try {
-	var config = require('./config');	
+	var config = require('./config');
 } catch (e) {
 	// Create a config.js file returning an object like the following if you haven't done it yet
 	var config = {
-		key: 'your_key',
-		secret: 'your_secret'
+		key: '',
+		secret: ''
 	};
 }
 
@@ -44,15 +56,15 @@ app.post('/oauth/signin', function (req, res) {
 		code: code
 	})
 	.then(function (request_object) {
-		// Here the user is authenticated, and the access token 
+		// Here the user is authenticated, and the access token
 		// for the requested provider is stored in the session.
 		// Continue the tutorial or checkout the step-4 to get
 		// the code for the request
-		res.send(200, 'The user is authenticated');
+		res.status(200).send('The user is authenticated');
 	})
 	.fail(function (e) {
 		console.log(e);
-		res.send(400, 'Code is incorrect');
+		res.status(400).send('Code is incorrect');
 	});
 });
 
@@ -72,7 +84,7 @@ app.get('/me', function (req, res) {
 	})
 	.fail(function (e) {
 		console.log(e);
-		res.send(400, 'An error occured');
+		res.status(400).send('An error occured');
 	});
 });
 
